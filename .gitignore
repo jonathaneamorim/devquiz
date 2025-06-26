@@ -1,0 +1,52 @@
+# Ignorar diretórios e arquivos de sistema operacional
+.DS_Store # macOS
+Thumbs.db # Windows
+ehthumbs.db # Windows
+Desktop.ini # Windows
+.Trash-* # Linux
+*.swp # Vim
+*~ # Arquivos de backup de editores
+
+# Ignorar diretórios de cache e logs (geralmente criados por frameworks/aplicações)
+/cache/
+/logs/
+/tmp/
+
+# Ignorar o diretório vendor (gerenciado pelo Composer)
+/vendor/
+
+# ignora as pastas do intelij
+/.idea/
+
+# Ignorar arquivos de configuração de ambiente (senhas, chaves de API, etc.)
+# Esses arquivos não podem ser versionados
+# Caso necessário, criar um arquivo .env.example para que outros desenvolvedores saibam o que configurar.
+.env
+.env.*.local # Ex: .env.development.local, .env.production.local
+
+# Ignorar arquivos de dependências do Composer
+composer.lock # Geralmente você quer versionar o composer.lock em apps para garantir que todos usem as mesmas versões.
+              # Mas em um template, você pode querer ignorar para que cada novo projeto gere o seu.
+              # Se você quer o controle exato de versões, REMOVA esta linha.
+              # Para um MVP simples que serve de template, deixar aqui pode ser ok.
+
+# Ignorar diretórios e arquivos específicos do VS Code
+.vscode/ # Configurações do workspace do VS Code
+*.code-workspace # Arquivos de workspace do VS Code
+
+# Ignorar outros arquivos temporários ou de build
+*.phar
+*.zip
+*.tar.gz
+*.rar
+*.log
+*.sql # Backups de banco de dados locais
+/web/assets/compiled/ # Exemplo de diretório para assets compilados (CSS/JS)
+/public/assets/compiled/ # Outra opção comum para assets compilados
+
+# Ignorar arquivos de teste (se aplicável)
+/tests/coverage/ # Cobertura de testes
+/.phpunit.result.cache # Cache do PHPUnit
+
+# Ignorar arquivos de uploads de usuários ou conteúdos dinâmicos
+/public/uploads/ # Exemplo para arquivos enviados por usuários
