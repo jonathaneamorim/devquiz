@@ -3,7 +3,7 @@
 return [
     "database" => [
         'host' => 'localhost',
-        'dbname' => 'php_nexus',
+        'dbname' => 'devquiz',
         'username' => 'root',
         'password' => 'root',
         'charset' => 'utf8',

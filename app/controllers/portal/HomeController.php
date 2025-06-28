@@ -3,32 +3,16 @@
 namespace app\controllers\portal;
 
 use app\controllers\ContainerController;
-use app\models\portal\User;
+use app\models\portal\Quiz;
 
 class HomeController extends ContainerController{
     public function index(){
-        $user = new User;
-        $users = $user->all();
-
-        $this->view([
-            'title' => 'Lista de users',
-            'users' => $users
-        ],'portal.home');
-    }
-
-    public function create() {
-
-    }
-
-    public function store() {
-
-    }
-
-    public function show() {
-
-    }
-
-    public function edit($id) {
-        
+        if($this->isLogged()) {
+            header('Location: /quiz');
+            exit;
+        } else {
+            header('Location: /auth/login');
+            exit;
+        }
     }
 }

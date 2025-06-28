@@ -9,5 +9,3 @@ class Uri {
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     }
 }
-
-// http://localhost:3000/cursos/show/12

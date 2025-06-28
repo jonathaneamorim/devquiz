@@ -1,5 +1,5 @@
-# Nexus-PHP-MVC
-Este projeto foi desenvolvido com o objetivo de servir como base para aplicações PHP que seguem o padrão MVC, facilitando um desenvolvimento mais rápido, organizado e consistente.
+# DevQuiz
+Sistema de gerenciamento de quizzes voltado para turmas do curso de Análise e Desenvolvimento de Sistemas (ADS). Construído utilizando a linguagem PHP com o padrão de arquitetura MVC (Model-View-Controller).
 
 ## Estrutura 
 ```plaintext
@@ -103,6 +103,9 @@ sudo dnf install php-mysqlnd
 
 Após a instalação, reinicie o servidor web (Apache, Nginx ou o servidor embutido PHP) para que a extensão seja carregada corretamente.
 
+## Modelamento de banco de dados
+![Modelamento de banco de dados](docs/media/databaseModel.png)
+
 ## Gerenciador de pacotes Composer
 O **Composer** é o gerenciador de dependências padrão para projetos em PHP — similar ao que o **NPM** é para o Node.js, ou o **Maven** e **Gradle** são para projetos Java.
 
@@ -142,6 +145,12 @@ Documentação oficial:
 
 ## Autoload
 - Documentation: [autoload](https://www.php.net/manual/en/language.oop5.autoload.php)
+
+
+## Observações do sistema
+A verificação se o usuário é admin ou usuário comum, por questões de segurança, é realizado completamente no lado do servidor. O campo id (atualmente presente na seesão) é utilizado como UUID, usando esse método dificulta a invasão de usuários com IDs normais. Por esse motivo é totalmente seguro passar o ID do usuário para a sessão. 
+
+## Flash messages
 
 ## Futuras feats
 - Pasta de documentação
