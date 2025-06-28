@@ -11,6 +11,7 @@ use core\Parameters;
 // dd(app\classes\Uri::uri());
 
 try {
+    startSessionIfNotStarted();
     // Capturar primeiro slug (curso)
     $controller = new Controller;
     $controller = $controller->load();

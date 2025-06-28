@@ -7,3 +7,24 @@ if (!function_exists('dd')) {
         die();
     }
 }
+
+function startSessionIfNotStarted() {
+    if(session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+}
+
+function setFlash($key, $message) {
+    startSessionIfNotStarted();
+    $_SESSION['flash'][$key] = $message;
+}
+
+function getFlash($key) {
+    startSessionIfNotStarted();
+    if(isset($_SESSION['flash'][$key])) {
+        $msg = $_SESSION['flash'][$key];
+        unset($_SESSION['flash'][$key]);
+        return $msg;
+    }
+    return null;
+}

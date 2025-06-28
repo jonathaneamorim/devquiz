@@ -4,10 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
+    <header style="height: 8vh; width: 100vw;">
+        <nav style="display: flex; justify-content: space-between;">
+            <div style="margin-left: 60px ;">
+                <h1>DevQuiz</h1>
+            </div>
+            <div style="display: flex; margin-right: 60px; align-items: center; gap: 10px;">
+                {% if not logged %}
+                    <div>
+                        <a href="/auth/login">login</a>
+                    </div>
+                    <div>
+                        <a href="/auth/register">cadastro</a>
+                    </div>
+                {% endif %}
+
+                {% if logged %}
+                    {% if isAdmin %}
+                        <div>
+                            <a href="/quiz/create">Criar um quiz</a>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <a href="/auth/logout">Sair</a>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
     <div class="container">
         {% block portal %}{% endblock %}
     </div>
+
+    {% block script %}{% endblock %}
 </body>
 </html>
