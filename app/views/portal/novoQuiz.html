@@ -2,15 +2,40 @@
 
 {% block portal %}
 
+<h2>Adicionar um novo quiz</h2>
 <form id="formNewQuiz">
+    <label for="titulo">Titulo do quiz: </label><br>
     <input type="text" name="titulo" id="titulo"><br>
-    <input type="text" name="descricao" id="descricao"><br>
-    <input type="image" src="" alt=""><br>
-    
+    <label for="descricao">Descrição do quiz: </label><br>
+    <input type="text" name="descricao" id="descricao"><br><br>
+    <button type="submit">Criar novo quiz</button>
 </form>
 
 {% endblock %}
 
 {% block script %}
+
+<script>
+    $("#formNewQuiz").on('submit', (e) => {
+        e.preventDefault();
+        const form = $(e.currentTarget);
+        $.ajax({
+            url: '/quiz/create',
+            type: 'POST',
+            data: form.serialize(),
+            success: (data, xhr) => {
+                if(xhr.status === 201) {
+                    alert(data);
+                } else {
+                    alert(xhr.status);
+                    alert(data);
+                }
+            },
+            error: (data) => {
+                alert('Erro: ' . data);
+            }
+        })
+    });
+</script>
 
 {% endblock %}
