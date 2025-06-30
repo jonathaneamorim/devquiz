@@ -7,6 +7,12 @@ use app\models\portal\User;
 
 class AuthController extends ContainerController{
 
+    private $user;
+
+    public function __construct() {
+        $this->user = new User();
+    }
+
     public function index() {
         header('Location: /auth/login');
         exit;
@@ -37,15 +43,15 @@ class AuthController extends ContainerController{
     public function autenticar() {
         $email = $_POST['email'];
         $senha = $_POST['senha'];
-        $user = User::findByEmail($email);
+        $userFound = $this->user->findByEmail($email);
 
-        if ($user) {
-            if(password_verify($senha, $user->senha)) {
+        if ($userFound) {
+            if(password_verify($senha, $userFound->senha)) {
                 $_SESSION['usuario'] = [
-                    'id' => $user->id,
-                    'nome' => $user->nome,
-                    'email' => $user->email,
-                    'isAdmin' => $user->isAdmin
+                    'id' => $userFound->id,
+                    'nome' => $userFound->nome,
+                    'email' => $userFound->email,
+                    'isAdmin' => $userFound->isAdmin
                 ];
 
                 http_response_code(200);
@@ -73,8 +79,10 @@ class AuthController extends ContainerController{
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $senha = password_hash($_POST['senha'], PASSWORD_DEFAULT);
-    
-        $verifica = User::findByEmail($email);
+
+        User::findByEmail($email);
+
+        $verifica = $this->user->findByEmail($email);
     
         if ($verifica) {
             http_response_code(400);
@@ -82,8 +90,8 @@ class AuthController extends ContainerController{
             exit;
         }
     
-        User::addNewUser($nome, $email, $senha);
-        $user = User::findByEmail($email);
+        $this->user->addNewUser($nome, $email, $senha);
+        $user = $this->user->findByEmail($email);
 
         $_SESSION['usuario'] = [
             'id' => $user->id, 

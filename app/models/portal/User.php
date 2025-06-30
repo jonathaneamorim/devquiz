@@ -7,12 +7,13 @@ use app\classes\Bind;
 
 class User extends Model {
     
-    protected static $table = 'usuario';
+    protected $table = 'usuario';
 
-    public static function findByEmail($email) {
+    // Why use self::$table: https://stackoverflow.com/questions/2350937/php-fatal-error-using-this-when-not-in-object-context
+    public function findByEmail($email) {
         try {
-            $connection = Bind::get('connection');
-            $stmt = $connection->prepare("SELECT * FROM " . self::$table . " WHERE email = :email");
+            $connection = $this->connection;
+            $stmt = $connection->prepare("SELECT * FROM $this->table WHERE email = :email");
             $stmt->bindParam(':email', $email);
             $stmt->execute();
 
@@ -23,14 +24,15 @@ class User extends Model {
         }
     }
 
-    public static function findById($id) {
+    public function findById($id) {
         try {
             $connection = Bind::get('connection');
             $stmt = $connection->prepare("SELECT * FROM $this->table WHERE id = :id");
-            $stmt = bindParam(':id', $id);
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
     
             return $stmt->fetch();
+
         } catch(PDOException $e) {
             error_log('Erro em ao encontrar usuário: ' . $e->getMessage());
             return false;
